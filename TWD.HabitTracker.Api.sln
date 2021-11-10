@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWD.HabitTracker.Api", "TWD.HabitTracker.Api\TWD.HabitTracker.Api.csproj", "{F768D42E-9E88-40A7-AC0B-106B0CBACE5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWD.HabitTracker.Domain", "TWD.HabitTracker.Domain\TWD.HabitTracker.Domain.csproj", "{5168D156-6530-428D-89AB-E578D92CBFCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWD.HabitTracker.Application", "TWD.HabitTracker.Application\TWD.HabitTracker.Application.csproj", "{325CD275-6650-470B-99A2-F29E6EF8FE99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWD.HabitTracker.Infra.Persistence.EFCore", "TWD.HabitTracker.Infra.Persistence.EFCore\TWD.HabitTracker.Infra.Persistence.EFCore.csproj", "{EE8B1F4A-5C4E-4865-A14A-A41299CC66BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWD.HabitTracker.Infra.Persistence.EFCore.SQLite", "TWD.HabitTracker.Infra.Persistence.EFCore.SQLite\TWD.HabitTracker.Infra.Persistence.EFCore.SQLite.csproj", "{B3709C62-37EE-4163-89F8-71C4AE46F63A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWD.HabitTracker.Infra.Persistence.EFCore.InMemory", "TWD.HabitTracker.Infra.Persistence.EFCore.InMemory\TWD.HabitTracker.Infra.Persistence.EFCore.InMemory.csproj", "{116C72D5-09D9-4650-8003-D91FCE088C5E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F768D42E-9E88-40A7-AC0B-106B0CBACE5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F768D42E-9E88-40A7-AC0B-106B0CBACE5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F768D42E-9E88-40A7-AC0B-106B0CBACE5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F768D42E-9E88-40A7-AC0B-106B0CBACE5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5168D156-6530-428D-89AB-E578D92CBFCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5168D156-6530-428D-89AB-E578D92CBFCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5168D156-6530-428D-89AB-E578D92CBFCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5168D156-6530-428D-89AB-E578D92CBFCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{325CD275-6650-470B-99A2-F29E6EF8FE99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{325CD275-6650-470B-99A2-F29E6EF8FE99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{325CD275-6650-470B-99A2-F29E6EF8FE99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{325CD275-6650-470B-99A2-F29E6EF8FE99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE8B1F4A-5C4E-4865-A14A-A41299CC66BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE8B1F4A-5C4E-4865-A14A-A41299CC66BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE8B1F4A-5C4E-4865-A14A-A41299CC66BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE8B1F4A-5C4E-4865-A14A-A41299CC66BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3709C62-37EE-4163-89F8-71C4AE46F63A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3709C62-37EE-4163-89F8-71C4AE46F63A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3709C62-37EE-4163-89F8-71C4AE46F63A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3709C62-37EE-4163-89F8-71C4AE46F63A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{116C72D5-09D9-4650-8003-D91FCE088C5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{116C72D5-09D9-4650-8003-D91FCE088C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{116C72D5-09D9-4650-8003-D91FCE088C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{116C72D5-09D9-4650-8003-D91FCE088C5E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
