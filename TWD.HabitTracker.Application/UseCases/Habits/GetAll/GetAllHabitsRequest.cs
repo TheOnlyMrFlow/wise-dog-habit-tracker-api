@@ -2,5 +2,5 @@
 
 public class GetAllHabitsRequest
 {
-    
+    public Guid UserId { get; set; }
 }

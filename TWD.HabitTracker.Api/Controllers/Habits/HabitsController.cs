@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TWD.HabitTracker.Api.HttpPresenters.Habits;
+using TWD.HabitTracker.Application.UseCases.Habits.AddOne;
 using TWD.HabitTracker.Application.UseCases.Habits.GetAll;
 using TWD.HabitTracker.Domain.Entities.Habits;
 
@@ -23,6 +24,19 @@ public class HabitsController : ControllerBase
         
         await interactor
             .SetRequest(new GetAllHabitsRequest())
+            .SetPresenter(presenter)
+            .InvokeAsync();
+
+        return presenter.Result;
+    }
+    
+    [HttpPost(Name = "Post habit")]
+    public async Task<IActionResult?> PostHabit([FromServices] AddOneHabitInteractor interactor)
+    {
+        var presenter = new AddOneHabitHttpPresenter();
+        
+        await interactor
+            .SetRequest(new AddOneHabitRequest {UserId = Guid.NewGuid()})
             .SetPresenter(presenter)
             .InvokeAsync();
 

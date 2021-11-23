@@ -8,8 +8,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services
-    .ConfigureDatabaseInMemory(builder.Configuration)
-    .AddRepositories()
+    //.ConfigureDatabaseInMemory(builder.Configuration)
+    .AddPersistenceServices(builder.Configuration)
     .AddUseCases();
 
 var app = builder.Build();

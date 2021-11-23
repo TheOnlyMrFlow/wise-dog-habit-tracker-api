@@ -14,9 +14,11 @@ public class GetAllHabitsInteractor : UseCaseInteractor<GetAllHabitsRequest, Get
 
     public override Task InvokeAsync()
     {
+        if (Request is null) throw new ArgumentNullException(nameof(Request));
+
         try
         {
-            var habits = _habitReadRepository.GetAll();
+            var habits = _habitReadRepository.GetAll(Request.UserId);
             Presenter?.PresentSuccess(new GetAllHabitsResponse(habits));
         }
         catch (Exception e)

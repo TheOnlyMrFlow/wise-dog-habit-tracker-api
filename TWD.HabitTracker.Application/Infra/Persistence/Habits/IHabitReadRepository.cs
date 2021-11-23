@@ -4,5 +4,5 @@ namespace TWD.HabitTracker.Application.Infra.Persistence.Habits;
 
 public interface IHabitReadRepository
 {
-    IEnumerable<Habit> GetAll();
+    IEnumerable<Habit> GetAll(Guid userId);
 }

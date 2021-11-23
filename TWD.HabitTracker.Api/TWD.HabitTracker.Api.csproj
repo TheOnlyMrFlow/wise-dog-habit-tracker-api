@@ -18,6 +18,7 @@
       <ProjectReference Include="..\TWD.HabitTracker.Infra.Persistence.EFCore.InMemory\TWD.HabitTracker.Infra.Persistence.EFCore.InMemory.csproj" />
       <ProjectReference Include="..\TWD.HabitTracker.Infra.Persistence.EFCore\TWD.HabitTracker.Infra.Persistence.EFCore.csproj" />
       <ProjectReference Include="..\TWD.HabitTracker.Infra.Persistence.EFCore.SQLite\TWD.HabitTracker.Infra.Persistence.EFCore.SQLite.csproj" />
+      <ProjectReference Include="..\WD.HabitTracker.Infra.Persistence.Mongodb\WD.HabitTracker.Infra.Persistence.Mongodb.csproj" />
     </ItemGroup>
 
 </Project>

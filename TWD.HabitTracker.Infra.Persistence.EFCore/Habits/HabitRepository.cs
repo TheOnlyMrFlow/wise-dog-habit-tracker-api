@@ -12,7 +12,9 @@ public class HabitRepository : IHabitReadRepository, IHabitWriteRepository
         _context = context;
     }
 
-    public IEnumerable<Habit> GetAll() => _context.Habits;
+    public IEnumerable<Habit> GetAll(Guid userId)
+        => _context.Habits.Where(h => h.UserId == userId);
 
-    public async Task AddAsync(Habit habit) => await _context.Habits.AddAsync(habit);
+    public async Task AddAsync(Habit habit) 
+        => await _context.Habits.AddAsync(habit);
 }

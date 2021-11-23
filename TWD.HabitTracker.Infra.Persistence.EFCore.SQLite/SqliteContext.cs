@@ -11,8 +11,10 @@ public class SqliteContext : Context
         => _connectionString = connectionString;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) 
-        => modelBuilder.ApplyConfigurationsFromAssembly(typeof(SqliteContext).Assembly);
+        => modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
-        => optionsBuilder.UseSqlite(_connectionString);
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlite(_connectionString, builder => builder.MigrationsAssembly(GetType().Assembly.FullName));
+    }
 }
