@@ -1,5 +1,4 @@
-﻿using System.Data.Common;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using TWD.HabitTracker.Domain.Entities.Habits;
@@ -12,9 +11,11 @@ public class HabitDocument
     {
         User = user;
     }
+
+    public int SchemaVersion { get; set; } = 1;
     
     [BsonId]
-    public Guid Id {get;set;}
+    public Guid Id { get; set; }
     
     public MongoDBRef User { get; set; }
 

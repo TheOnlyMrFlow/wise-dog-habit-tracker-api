@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using TWD.HabitTracker.Application.Infra.Persistence.Habits;
+using TWD.HabitTracker.Application.Infra.Persistence.Users;
 using WD.HabitTracker.Infra.Persistence.Mongodb;
 using WD.HabitTracker.Infra.Persistence.Mongodb.Repositories;
 
@@ -26,6 +27,9 @@ public static class PersistenceConfiguration
         services
             .Configure<HabitTrackerMongoDatabaseSettings>(configuration.GetSection("MongoDatabaseSettings"))
             .AddSingleton(sp => sp.GetRequiredService<IOptions<HabitTrackerMongoDatabaseSettings>>().Value);
+        
+        services.AddScoped<IUserReadRepository, UserRepository>();
+        services.AddScoped<IUserWriteRepository, UserRepository>();
         
         services.AddScoped<IHabitReadRepository, HabitRepository>();
         services.AddScoped<IHabitWriteRepository, HabitRepository>();

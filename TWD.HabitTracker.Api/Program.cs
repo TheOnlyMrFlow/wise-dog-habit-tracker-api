@@ -1,16 +1,19 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using TWD.HabitTracker.Api.Configurations.Persistence;
 using TWD.HabitTracker.Api.Configurations.UseCases;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
 builder.Services
-    //.ConfigureDatabaseInMemory(builder.Configuration)
+    .AddSwaggerGen()
+    .AddEndpointsApiExplorer()
     .AddPersistenceServices(builder.Configuration)
-    .AddUseCases();
+    .AddUseCases()
+    .AddControllers();
+
+// builder.Services
+//     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    // .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options => builder.Configuration.Bind("JwtSettings", options));
 
 var app = builder.Build();
 
