@@ -9,6 +9,6 @@ public class SignupHttpPresenter : HttpPresenter<SignupResponse>, ISignupPresent
 {
     public override void PresentSuccess(SignupResponse response)
     {
-        Result = new OkObjectResult(new {SecretKey = response.SecretKey});
+        Result = new OkObjectResult(new {DeviceToken = response.DeviceToken});
     }
 }

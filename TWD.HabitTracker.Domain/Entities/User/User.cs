@@ -1,8 +1,22 @@
-﻿namespace TWD.HabitTracker.Domain.Entities.User;
+﻿using TWD.HabitTracker.Domain.Entities.User.Auth;
+
+namespace TWD.HabitTracker.Domain.Entities.User;
 
 public class User
 {
-    public Guid Id { get; set; }
+    public User(Guid id, AuthInfo authInfo)
+    {
+        Id = id;
+        AuthInfo = authInfo;
+    }
     
-    public string SecretKey { get; set; }
+    public User(AuthInfo authInfo)
+    {
+        Id = Guid.NewGuid();
+        AuthInfo = authInfo;
+    }
+    
+    public Guid Id { get; set; }
+
+    public AuthInfo AuthInfo { get; set; }
 }

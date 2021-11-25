@@ -5,10 +5,10 @@ namespace TWD.HabitTracker.Application.UseCases.Auth.Signup;
 
 public class SignupResponse: IUseCaseResponse
 {
-    public SignupResponse(string secretKey)
+    public SignupResponse(string deviceToken)
     {
-        SecretKey = secretKey;
+        DeviceToken = deviceToken;
     }
 
-    public string SecretKey { get; }
+    public string DeviceToken { get; }
 }

@@ -4,6 +4,7 @@ using TWD.HabitTracker.Application.Infra.Persistence.Users;
 using TWD.HabitTracker.Domain.Entities.Habits;
 using TWD.HabitTracker.Domain.Entities.User;
 using WD.HabitTracker.Infra.Persistence.Mongodb.Documents;
+using WD.HabitTracker.Infra.Persistence.Mongodb.Documents.Users;
 
 namespace WD.HabitTracker.Infra.Persistence.Mongodb.Repositories;
 
@@ -21,6 +22,7 @@ public class UserRepository : IUserReadRepository, IUserWriteRepository
 
     public async Task AddAsync(User user)
     {
-        await _userCollection.InsertOneAsync(UserDocument.FromUser(user));
+        var doc = new UserDocument(user);
+        await _userCollection.InsertOneAsync(doc);
     }
 }

@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using TWD.HabitTracker.Domain.Entities.Habits;
 
-namespace WD.HabitTracker.Infra.Persistence.Mongodb.Documents;
+namespace WD.HabitTracker.Infra.Persistence.Mongodb.Documents.Habits;
 
 public class HabitDocument
 {

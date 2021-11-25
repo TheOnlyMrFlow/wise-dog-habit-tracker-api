@@ -3,6 +3,8 @@ using TWD.HabitTracker.Application.Infra.Persistence.Habits;
 using TWD.HabitTracker.Application.Infra.Persistence.Users;
 using TWD.HabitTracker.Domain.Entities.Habits;
 using TWD.HabitTracker.Domain.Entities.User;
+using TWD.HabitTracker.Domain.Entities.User.Auth;
+using TWD.HabitTracker.Domain.Entities.User.Auth.Device;
 
 namespace TWD.HabitTracker.Application.UseCases.Auth.Signup;
 
@@ -21,20 +23,21 @@ public class SignupInteractor : UseCaseInteractor<SignupRequest, SignupResponse,
 
         try
         {
-            var secretKey = string.Join(
+            var deviceToken = string.Join(
                     "",
                     Enumerable
                         .Repeat(0, 8)
                         .Select(_ => Convert.ToBase64String(Guid.NewGuid().ToByteArray())))
                 .Replace("=", "");
 
-            var user = new User()
-            {
-                SecretKey = secretKey
-            };
+            var authInfo = new AuthInfo();
+
+            authInfo.DeviceAuth = new DeviceAuth(deviceToken);
+
+            var user = new User(authInfo);
 
             await _userWriteRepository.AddAsync(user);
-            Presenter?.PresentSuccess(new SignupResponse(user.SecretKey));
+            Presenter?.PresentSuccess(new SignupResponse(deviceToken));
         }
         catch (Exception e)
         {

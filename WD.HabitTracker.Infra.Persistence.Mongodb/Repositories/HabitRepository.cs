@@ -2,6 +2,7 @@
 using TWD.HabitTracker.Application.Infra.Persistence.Habits;
 using TWD.HabitTracker.Domain.Entities.Habits;
 using WD.HabitTracker.Infra.Persistence.Mongodb.Documents;
+using WD.HabitTracker.Infra.Persistence.Mongodb.Documents.Habits;
 
 namespace WD.HabitTracker.Infra.Persistence.Mongodb.Repositories;
 
