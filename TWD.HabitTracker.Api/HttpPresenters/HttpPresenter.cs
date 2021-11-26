@@ -7,7 +7,7 @@ public abstract class HttpPresenter<T> : IUseCasePresenter<T> where T : IUseCase
 {
     public IActionResult? Result { get; protected set; }
 
-    public abstract void PresentSuccess(T response);
+    public abstract void Success(T response);
 
-    public void PresentUnknownError() => Result = new StatusCodeResult(500);
+    public void UnknownError() => Result = new StatusCodeResult(500);
 }

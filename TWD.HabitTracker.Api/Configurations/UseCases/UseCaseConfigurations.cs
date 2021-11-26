@@ -1,4 +1,5 @@
-﻿using TWD.HabitTracker.Application.UseCases.Auth.Signup;
+﻿using TWD.HabitTracker.Application.UseCases.Auth.Login;
+using TWD.HabitTracker.Application.UseCases.Auth.Signup;
 using TWD.HabitTracker.Application.UseCases.Habits.AddOne;
 using TWD.HabitTracker.Application.UseCases.Habits.GetAll;
 
@@ -10,7 +11,8 @@ public static class UseCaseConfigurations
     {
         //auth
         services.AddScoped<SignupInteractor>();
-        
+        services.AddScoped<LoginInteractor>();
+
         // habits
         services.AddScoped<GetAllHabitsInteractor>();
         services.AddScoped<AddOneHabitInteractor>();

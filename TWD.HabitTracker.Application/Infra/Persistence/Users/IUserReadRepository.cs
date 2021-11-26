@@ -5,5 +5,5 @@ namespace TWD.HabitTracker.Application.Infra.Persistence.Users;
 
 public interface IUserReadRepository
 {
-    public Task<User> FindByDeviceTokenAsync(string deviceToken);
+    public Task<User?> FindByDeviceTokenAsync(string deviceToken);
 }

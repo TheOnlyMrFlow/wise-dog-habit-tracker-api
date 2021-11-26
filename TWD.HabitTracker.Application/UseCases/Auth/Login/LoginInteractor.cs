@@ -1,18 +1,18 @@
-﻿using TWD.HabitTracker.Application.Common;
+﻿using TWD.HabitTracker.Application.Authentication;
+using TWD.HabitTracker.Application.Common;
 using TWD.HabitTracker.Application.Infra.Persistence.Users;
-using TWD.HabitTracker.Domain.Entities.User;
-using TWD.HabitTracker.Domain.Entities.User.Auth;
-using TWD.HabitTracker.Domain.Entities.User.Auth.Device;
 
 namespace TWD.HabitTracker.Application.UseCases.Auth.Login;
 
 public class LoginInteractor : UseCaseInteractor<LoginRequest, LoginResponse, ILoginPresenter>
 {
     private readonly IUserReadRepository _userReadRepository;
+    private readonly IJwtManager _jwtManager;
 
-    public LoginInteractor(IUserReadRepository userReadRepository)
+    public LoginInteractor(IUserReadRepository userReadRepository, IJwtManager jwtManager)
     {
         _userReadRepository = userReadRepository;
+        _jwtManager = jwtManager;
     }
 
     public override async Task InvokeAsync()
@@ -22,12 +22,20 @@ public class LoginInteractor : UseCaseInteractor<LoginRequest, LoginResponse, IL
         try
         {
             var user = await _userReadRepository.FindByDeviceTokenAsync(Request.DeviceToken);
+
+            if (user is null)
+            {
+                Presenter?.Forbid();
+                return;
+            }
+
+            var jwt = _jwtManager.BuildForDeviceAuth(user);
             
-            // todo generate jwt and return it
+            Presenter?.Success(new LoginResponse(jwt));
         }
         catch (Exception e)
         {
-            Presenter?.PresentUnknownError();
+            Presenter?.UnknownError();
 
             throw;
         }

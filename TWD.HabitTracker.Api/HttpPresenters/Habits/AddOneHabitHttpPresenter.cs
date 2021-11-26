@@ -7,7 +7,7 @@ namespace TWD.HabitTracker.Api.HttpPresenters.Habits;
 
 public class AddOneHabitHttpPresenter : HttpPresenter<AddOneHabitResponse>, IAddOneHabitPresenter
 {
-    public override void PresentSuccess(AddOneHabitResponse response)
+    public override void Success(AddOneHabitResponse response)
     {
         Result = new OkObjectResult(HabitViewModel.FromDomainEntity(response.Habit));
     }

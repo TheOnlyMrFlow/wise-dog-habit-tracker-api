@@ -2,8 +2,8 @@
 {
     public interface IUseCasePresenter<in TUseCaseResponse> where TUseCaseResponse : IUseCaseResponse
     {
-        void PresentSuccess(TUseCaseResponse response);
+        void Success(TUseCaseResponse response);
 
-        void PresentUnknownError();
+        void UnknownError();
     }
 }

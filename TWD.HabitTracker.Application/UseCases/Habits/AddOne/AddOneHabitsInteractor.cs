@@ -25,11 +25,11 @@ public class AddOneHabitInteractor : UseCaseInteractor<AddOneHabitRequest, AddOn
             };
 
             await _habitWriteRepository.AddAsync(habit);
-            Presenter?.PresentSuccess(new AddOneHabitResponse(habit));
+            Presenter?.Success(new AddOneHabitResponse(habit));
         }
         catch (Exception e)
         {
-            Presenter?.PresentUnknownError();
+            Presenter?.UnknownError();
 
             throw;
         }

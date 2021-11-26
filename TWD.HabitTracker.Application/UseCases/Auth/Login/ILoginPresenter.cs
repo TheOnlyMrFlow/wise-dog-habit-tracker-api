@@ -2,4 +2,7 @@
 
 namespace TWD.HabitTracker.Application.UseCases.Auth.Login;
 
-public interface ILoginPresenter : IUseCasePresenter<LoginResponse> { }
+public interface ILoginPresenter : IUseCasePresenter<LoginResponse>
+{
+    void Forbid();
+}

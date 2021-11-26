@@ -7,7 +7,7 @@ namespace TWD.HabitTracker.Api.HttpPresenters.Auth;
 
 public class SignupHttpPresenter : HttpPresenter<SignupResponse>, ISignupPresenter
 {
-    public override void PresentSuccess(SignupResponse response)
+    public override void Success(SignupResponse response)
     {
         Result = new OkObjectResult(new {DeviceToken = response.DeviceToken});
     }

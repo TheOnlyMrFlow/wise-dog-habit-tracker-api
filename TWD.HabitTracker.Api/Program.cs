@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using TWD.HabitTracker.Api.Configurations.Auth;
 using TWD.HabitTracker.Api.Configurations.Persistence;
 using TWD.HabitTracker.Api.Configurations.UseCases;
 
@@ -8,12 +9,9 @@ builder.Services
     .AddSwaggerGen()
     .AddEndpointsApiExplorer()
     .AddPersistenceServices(builder.Configuration)
+    .AddAuthServices(builder.Configuration)
     .AddUseCases()
     .AddControllers();
-
-// builder.Services
-//     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    // .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options => builder.Configuration.Bind("JwtSettings", options));
 
 var app = builder.Build();
 
@@ -25,6 +23,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

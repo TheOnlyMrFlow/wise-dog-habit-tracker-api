@@ -37,11 +37,11 @@ public class SignupInteractor : UseCaseInteractor<SignupRequest, SignupResponse,
             var user = new User(authInfo);
 
             await _userWriteRepository.AddAsync(user);
-            Presenter?.PresentSuccess(new SignupResponse(deviceToken));
+            Presenter?.Success(new SignupResponse(deviceToken));
         }
         catch (Exception e)
         {
-            Presenter?.PresentUnknownError();
+            Presenter?.UnknownError();
 
             throw;
         }
