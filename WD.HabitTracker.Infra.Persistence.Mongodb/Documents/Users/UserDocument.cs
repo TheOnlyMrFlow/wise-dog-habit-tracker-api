@@ -17,6 +17,7 @@ public class UserDocument
     [BsonId]
     public Guid Id { get; set; }
     
+    [BsonElement]
     public AuthInfoDocument AuthInfo { get; set; }
 
     public User ToUser() => new (Id, AuthInfo.ToAuthInfo());

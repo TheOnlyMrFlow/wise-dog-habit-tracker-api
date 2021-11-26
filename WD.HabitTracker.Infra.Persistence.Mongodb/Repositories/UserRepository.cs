@@ -25,4 +25,12 @@ public class UserRepository : IUserReadRepository, IUserWriteRepository
         var doc = new UserDocument(user);
         await _userCollection.InsertOneAsync(doc);
     }
+
+    public async Task<User> FindByDeviceTokenAsync(string deviceToken)
+    {
+        var userDocQuery = await _userCollection.FindAsync(d => d.AuthInfo.DeviceAuth?.DeviceToken == deviceToken);
+        var userDoc = await userDocQuery.FirstOrDefaultAsync();
+
+        return userDoc.ToUser();
+    }
 }

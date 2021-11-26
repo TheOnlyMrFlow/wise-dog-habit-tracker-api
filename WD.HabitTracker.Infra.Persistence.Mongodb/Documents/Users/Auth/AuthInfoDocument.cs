@@ -1,4 +1,5 @@
-﻿using TWD.HabitTracker.Domain.Entities.User.Auth;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using TWD.HabitTracker.Domain.Entities.User.Auth;
 using WD.HabitTracker.Infra.Persistence.Mongodb.Documents.Users.Auth.Credentials;
 using WD.HabitTracker.Infra.Persistence.Mongodb.Documents.Users.Auth.Device;
 
@@ -12,7 +13,12 @@ public class AuthInfoDocument
         CredentialsAuth = authInfo.CredentialsAuth is null ? null : new CredentialsAuthDocument(authInfo.CredentialsAuth);
     }
     
+    [BsonElement]
+    [BsonIgnoreIfNull]
     public DeviceAuthDocument? DeviceAuth { get; }
+    
+    [BsonElement]
+    [BsonIgnoreIfNull]
     public CredentialsAuthDocument? CredentialsAuth { get; }
 
     public AuthInfo ToAuthInfo()
