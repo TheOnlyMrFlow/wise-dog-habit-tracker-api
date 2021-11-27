@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TWD.HabitTracker.Api.HttpPresenters.Habits;
 using TWD.HabitTracker.Application.UseCases.Habits.AddOne;
 using TWD.HabitTracker.Application.UseCases.Habits.GetAll;
 using TWD.HabitTracker.Domain.Entities.Habits;
+using TWD.HabitTracker.Domain.Entities.User.Auth;
 
 namespace TWD.HabitTracker.Api.Controllers.Habits;
 
@@ -17,13 +19,14 @@ public class HabitsController : ControllerBase
         _logger = logger;
     }
 
+    [Authorize]
     [HttpGet(Name = "Get habits")]
     public async Task<IActionResult?> GetHabits([FromServices] GetAllHabitsInteractor interactor)
     {
         var presenter = new GetAllHabitsHttpPresenter();
         
         await interactor
-            .SetRequest(new GetAllHabitsRequest())
+            .SetRequest(new GetAllHabitsRequest(new LoggedUser(User.Claims)))
             .SetPresenter(presenter)
             .InvokeAsync();
 

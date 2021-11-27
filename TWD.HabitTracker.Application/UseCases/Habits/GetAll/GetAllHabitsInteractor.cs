@@ -18,7 +18,7 @@ public class GetAllHabitsInteractor : UseCaseInteractor<GetAllHabitsRequest, Get
 
         try
         {
-            var habits = _habitReadRepository.GetAll(Request.UserId);
+            var habits = _habitReadRepository.GetAll(Request.LoggedUser.UserId);
             Presenter?.Success(new GetAllHabitsResponse(habits));
         }
         catch (Exception e)

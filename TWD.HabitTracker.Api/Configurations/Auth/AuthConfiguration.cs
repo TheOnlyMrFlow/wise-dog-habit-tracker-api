@@ -15,7 +15,6 @@ public static class AuthConfiguration
         
         services
             .AddSingleton<JwtConfig>(_ => jwtConfig)
-            //.Configure<JwtConfig>(configuration.GetSection("JwtConfig"))
             .AddAuthentication(options => {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -34,7 +33,7 @@ public static class AuthConfiguration
                     ValidateLifetime = true
                 }; 
             });
-
+        
         services.AddScoped<IJwtManager, JwtManager>();
         
         return services;

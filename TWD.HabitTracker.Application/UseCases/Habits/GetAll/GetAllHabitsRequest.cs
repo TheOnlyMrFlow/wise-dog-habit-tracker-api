@@ -1,6 +1,12 @@
-﻿namespace TWD.HabitTracker.Application.UseCases.Habits.GetAll;
+﻿using TWD.HabitTracker.Domain.Entities.User.Auth;
+
+namespace TWD.HabitTracker.Application.UseCases.Habits.GetAll;
 
 public class GetAllHabitsRequest
 {
-    public Guid UserId { get; set; }
+    public GetAllHabitsRequest(LoggedUser loggedUser)
+    {
+        LoggedUser = loggedUser;
+    }
+    public LoggedUser LoggedUser { get; set; }
 }
