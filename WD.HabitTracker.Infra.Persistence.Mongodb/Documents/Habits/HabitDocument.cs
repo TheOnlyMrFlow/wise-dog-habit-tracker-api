@@ -38,7 +38,7 @@ public class HabitDocument
             Id = Id,
             Name = Name,
             Stamps = {  },
-            UserId = new Guid(User.ToString())
+            UserId = new Guid(User.Id.ToString()!)
         };
     }
 

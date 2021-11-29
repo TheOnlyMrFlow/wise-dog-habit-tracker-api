@@ -20,7 +20,8 @@ public class HabitRepository: IHabitReadRepository, IHabitWriteRepository
 
     public IEnumerable<Habit> GetAll(Guid userId)
     {
-        return _habitCollection.FindSync(document => true).ToEnumerable().Select(doc => doc.ToHabit());
+        var habitrandom = _habitCollection.FindSync(d => true).FirstOrDefault();
+        return _habitCollection.FindSync(document => document.User.Id == userId.ToString()).ToEnumerable().Select(doc => doc.ToHabit());
     }
 
     public async Task AddAsync(Habit habit)
