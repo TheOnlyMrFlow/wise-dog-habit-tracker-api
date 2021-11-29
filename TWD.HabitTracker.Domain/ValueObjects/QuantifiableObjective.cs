@@ -2,11 +2,11 @@
 
 public class QuantifiableObjective : IEquatable<QuantifiableObjective>
 {
-    public string Unit { get; }
+    public decimal? Value { get; }
     
-    public decimal Value { get; }
+    public string? Unit { get; }
 
-    public QuantifiableObjective(decimal value, string unit)
+    public QuantifiableObjective(decimal value, string? unit)
     {
         Value = value;
         Unit = unit;

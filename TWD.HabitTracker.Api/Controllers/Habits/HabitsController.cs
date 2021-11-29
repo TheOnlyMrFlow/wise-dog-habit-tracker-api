@@ -26,20 +26,21 @@ public class HabitsController : ControllerBase
         var presenter = new GetAllHabitsHttpPresenter();
         
         await interactor
-            .SetRequest(new GetAllHabitsRequest(new LoggedUser(User.Claims)))
+            .SetRequest(new GetAllHabitsRequest(this.GetLoggedUser()))
             .SetPresenter(presenter)
             .InvokeAsync();
 
         return presenter.Result;
     }
     
+    [Authorize]
     [HttpPost(Name = "Post habit")]
-    public async Task<IActionResult?> PostHabit([FromServices] AddOneHabitInteractor interactor)
+    public async Task<IActionResult?> PostHabit([FromServices] AddOneHabitInteractor interactor, [FromBody] CreateHabitHttpRequestBody request)
     {
         var presenter = new AddOneHabitHttpPresenter();
         
         await interactor
-            .SetRequest(new AddOneHabitRequest {UserId = Guid.NewGuid()})
+            .SetRequest(request.ToApplicationRequest(this.GetLoggedUser()))
             .SetPresenter(presenter)
             .InvokeAsync();
 

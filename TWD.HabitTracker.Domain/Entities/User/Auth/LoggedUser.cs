@@ -8,9 +8,9 @@ public class LoggedUser
     
     public string AuthMean { get; set; }
     
-    public LoggedUser(IEnumerable<Claim> claims)
+    public LoggedUser(ClaimsPrincipal user)
     {
-        claims = claims.ToArray();
+        var claims = user.Claims.ToArray();
         
         var userIdClaim = claims.FirstOrDefault(c => c.Type == "userId");
         if (userIdClaim is null) throw new ArgumentNullException(nameof(userIdClaim));

@@ -46,7 +46,7 @@ public class HabitDocument
     {
         return new(new MongoDBRef("user", new BsonString(habit.UserId.ToString())))
         {
-            Name = "Toto"
+            Name = habit.Name
         };
     }
 }
