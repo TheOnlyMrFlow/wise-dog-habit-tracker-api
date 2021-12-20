@@ -1,8 +1,17 @@
 ﻿namespace TWD.HabitTracker.Domain.Entities.Habits.Stamps;
 
-public abstract class Stamp
+public class Stamp
 {
+    public Stamp(DateTime date, decimal? value)
+    {
+        Date = date;
+        Value = value;
+    }
+
     public DateTime Date { get; set; }
     
-    public double? Value { get; set; }
+    public decimal? Value { get; set; }
+
+    public bool IsOlderThan(Stamp other)
+        => Date < other.Date;
 }

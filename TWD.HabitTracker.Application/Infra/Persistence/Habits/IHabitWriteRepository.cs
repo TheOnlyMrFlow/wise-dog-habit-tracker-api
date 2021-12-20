@@ -5,4 +5,5 @@ namespace TWD.HabitTracker.Application.Infra.Persistence.Habits;
 public interface IHabitWriteRepository
 {
     Task AddAsync(Habit habit);
+    Task UpdateAsync(Habit habit);
 }

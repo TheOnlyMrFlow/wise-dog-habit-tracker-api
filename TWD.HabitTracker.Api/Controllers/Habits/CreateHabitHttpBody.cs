@@ -4,7 +4,7 @@ using TWD.HabitTracker.Domain.Entities.User.Auth;
 
 namespace TWD.HabitTracker.Api.Controllers.Habits;
 
-public class CreateHabitHttpRequestBody
+public class CreateHabitHttpBody
 {
     public class CreateHabitObjectiveHttpRequestBody
     {

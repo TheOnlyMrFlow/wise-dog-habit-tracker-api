@@ -18,14 +18,15 @@ public class HabitRepository: IHabitReadRepository, IHabitWriteRepository
         _habitCollection = database.GetCollection<HabitDocument>(settings.HabitsCollectionName);
     }
 
-    public IEnumerable<Habit> GetAll(Guid userId)
-    {
-        var habitrandom = _habitCollection.FindSync(d => true).FirstOrDefault();
-        return _habitCollection.FindSync(document => document.User.Id == userId.ToString()).ToEnumerable().Select(doc => doc.ToHabit());
-    }
+    public IEnumerable<Habit> GetAll(Guid userId) 
+        => _habitCollection.FindSync(document => document.User.Id == userId.ToString()).ToEnumerable().Select(doc => doc.ToHabit());
 
-    public async Task AddAsync(Habit habit)
-    {
-        await _habitCollection.InsertOneAsync(HabitDocument.FromHabit(habit));
-    }
+    public async Task<Habit> Get(Guid habitId) 
+        => (await _habitCollection.FindAsync(d => d.Id == habitId)).FirstOrDefault().ToHabit();
+
+    public async Task AddAsync(Habit habit) 
+        => await _habitCollection.InsertOneAsync(HabitDocument.FromHabit(habit));
+
+    public async Task UpdateAsync(Habit habit)
+        => await _habitCollection.ReplaceOneAsync(d => d.Id == habit.Id, HabitDocument.FromHabit(habit));
 }

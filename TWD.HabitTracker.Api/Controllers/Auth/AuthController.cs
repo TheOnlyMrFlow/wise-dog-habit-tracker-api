@@ -30,7 +30,7 @@ public class AuthController : ControllerBase
     }
     
     [HttpPost("login", Name = "Login")]
-    public async Task<IActionResult?> Login([FromServices] LoginInteractor interactor, [FromBody] LoginHttpRequestBody body)
+    public async Task<IActionResult?> Login([FromServices] LoginInteractor interactor, [FromBody] LoginHttpBody body)
     {
         var presenter = new LoginHttpPresenter();
         

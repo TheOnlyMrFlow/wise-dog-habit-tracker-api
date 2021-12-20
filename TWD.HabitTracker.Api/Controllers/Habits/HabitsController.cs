@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using TWD.HabitTracker.Api.HttpPresenters.Habits;
 using TWD.HabitTracker.Application.UseCases.Habits.AddOne;
 using TWD.HabitTracker.Application.UseCases.Habits.GetAll;
-using TWD.HabitTracker.Domain.Entities.Habits;
-using TWD.HabitTracker.Domain.Entities.User.Auth;
 
 namespace TWD.HabitTracker.Api.Controllers.Habits;
 
@@ -35,12 +33,12 @@ public class HabitsController : ControllerBase
     
     [Authorize]
     [HttpPost(Name = "Post habit")]
-    public async Task<IActionResult?> PostHabit([FromServices] AddOneHabitInteractor interactor, [FromBody] CreateHabitHttpRequestBody request)
+    public async Task<IActionResult?> PostHabit([FromServices] AddOneHabitInteractor interactor, [FromBody] CreateHabitHttpBody httpBody)
     {
         var presenter = new AddOneHabitHttpPresenter();
         
         await interactor
-            .SetRequest(request.ToApplicationRequest(this.GetLoggedUser()))
+            .SetRequest(httpBody.ToApplicationRequest(this.GetLoggedUser()))
             .SetPresenter(presenter)
             .InvokeAsync();
 
