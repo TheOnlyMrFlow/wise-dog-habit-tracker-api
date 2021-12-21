@@ -8,6 +8,6 @@ public class GetAllHabitsHttpPresenter : HttpPresenter<GetAllHabitsResponse>, IG
 {
     public override void Success(GetAllHabitsResponse response)
     {
-        Result = new OkObjectResult(response.Habits.Select(HabitViewModel.FromDomainEntity));
+        Result = new OkObjectResult(response.Habits.Select(h => new HabitLightViewModel(h)));
     }
 }

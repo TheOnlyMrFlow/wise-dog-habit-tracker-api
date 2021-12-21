@@ -9,6 +9,6 @@ public class AddOneHabitHttpPresenter : HttpPresenter<AddOneHabitResponse>, IAdd
 {
     public override void Success(AddOneHabitResponse response)
     {
-        Result = new OkObjectResult(HabitViewModel.FromDomainEntity(response.Habit));
+        Result = new OkObjectResult(new HabitLightViewModel(response.Habit));
     }
 }

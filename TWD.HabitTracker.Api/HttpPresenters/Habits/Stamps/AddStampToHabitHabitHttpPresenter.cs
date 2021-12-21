@@ -8,7 +8,7 @@ namespace TWD.HabitTracker.Api.HttpPresenters.Habits.Stamps;
 public class AddStampToHabitHabitHttpPresenter : HttpPresenter<AddStampToHabitResponse>, IAddStampToHabitPresenter
 {
     public override void Success(AddStampToHabitResponse response) 
-        => Result = new OkObjectResult(HabitViewModel.FromDomainEntity(response.Habit));
+        => Result = new OkObjectResult(new HabitLightViewModel(response.Habit));
 
     public void StampMustHaveValue() 
         => Result = new BadRequestObjectResult(new ValidationProblemDetails { Title = "Stamp must have a value." });
