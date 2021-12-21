@@ -35,6 +35,9 @@ public class Habit
 
     public void AddStamp(Stamp stamp)
     {
+        if (_stamps.Any(s => s.Date == stamp.Date))
+            throw new StampAlreadyExistsException();
+        
         if (IsQuantifiable && !stamp.Value.HasValue)
             throw new StampMustHaveValueException();
         
@@ -44,6 +47,18 @@ public class Habit
             _lastTenStamps.Add(stamp);
         
         else if (_lastTenStamps.Any(s => s.IsOlderThan(s)))
+            _lastTenStamps = _stamps.OrderByDescending(s => s.Date).Take(10).ToList();
+    }
+
+    public void RemoveStamp(DateTime stampDate)
+    {
+        var stamp = _stamps.FirstOrDefault(s => s.Date == stampDate);
+        if (stamp is null)
+            throw new StampNotFoundException();
+
+        _stamps.Remove(stamp);
+        
+        if (_lastTenStamps.Any(s => s.Date == stampDate))
             _lastTenStamps = _stamps.OrderByDescending(s => s.Date).Take(10).ToList();
     }
 }

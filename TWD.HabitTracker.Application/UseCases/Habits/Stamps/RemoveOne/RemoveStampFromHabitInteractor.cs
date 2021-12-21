@@ -3,14 +3,14 @@ using TWD.HabitTracker.Application.Infra.Persistence.Habits;
 using TWD.HabitTracker.Domain.Entities.Habits.Stamps;
 using TWD.HabitTracker.Domain.Exceptions;
 
-namespace TWD.HabitTracker.Application.UseCases.Habits.Stamps.AddOne;
+namespace TWD.HabitTracker.Application.UseCases.Habits.Stamps.RemoveOne;
 
-public class AddStampToHabitInteractor : UseCaseInteractor<AddStampToHabitRequest, AddStampToHabitResponse, IAddStampToHabitPresenter>
+public class RemoveStampFromHabitInteractor : UseCaseInteractor<RemoveStampFromHabitRequest, RemoveStampFromHabitResponse, IRemoveStampFromHabitPresenter>
 {
     private readonly IHabitReadRepository _habitReadRepository;
     private readonly IHabitWriteRepository _habitWriteRepository;
 
-    public AddStampToHabitInteractor(IHabitReadRepository habitReadRepository, IHabitWriteRepository habitWriteRepository)
+    public RemoveStampFromHabitInteractor(IHabitReadRepository habitReadRepository, IHabitWriteRepository habitWriteRepository)
     {
         _habitReadRepository = habitReadRepository;
         _habitWriteRepository = habitWriteRepository;
@@ -28,21 +28,16 @@ public class AddStampToHabitInteractor : UseCaseInteractor<AddStampToHabitReques
                 Presenter?.NotFound();
                 return;
             }
-
-            var stamp = new Stamp(Request.StampDate, Request.StampValue);
-            habit.AddStamp(stamp);
+            
+            habit.RemoveStamp(Request.StampDate);
 
             await _habitWriteRepository.UpdateAsync(habit);
             
-            Presenter?.Success(new AddStampToHabitResponse(habit));
+            Presenter?.Success(new RemoveStampFromHabitResponse(habit));
         }
-        catch (StampMustHaveValueException)
+        catch (StampNotFoundException)
         {
-            Presenter?.StampMustHaveValue();
-        }
-        catch (StampAlreadyExistsException)
-        {
-            Presenter?.StampAlreadyExists();
+            Presenter?.NotFound();
         }
         catch (Exception e)
         {

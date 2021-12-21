@@ -5,5 +5,5 @@ namespace TWD.HabitTracker.Application.Infra.Persistence.Habits;
 public interface IHabitReadRepository
 {
     IEnumerable<Habit> GetAll(Guid userId);
-    Task<Habit?> Get(Guid habitId);
+    Task<Habit?> GetAsync(Guid habitId);
 }

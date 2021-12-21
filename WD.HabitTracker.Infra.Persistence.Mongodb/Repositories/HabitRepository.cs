@@ -21,7 +21,7 @@ public class HabitRepository: IHabitReadRepository, IHabitWriteRepository
     public IEnumerable<Habit> GetAll(Guid userId) 
         => _habitCollection.FindSync(document => document.User.Id == userId.ToString()).ToEnumerable().Select(doc => doc.ToHabit());
 
-    public async Task<Habit?> Get(Guid habitId) 
+    public async Task<Habit?> GetAsync(Guid habitId) 
         => (await _habitCollection.FindAsync(d => d.Id == habitId)).FirstOrDefault()?.ToHabit();
 
     public async Task AddAsync(Habit habit) 

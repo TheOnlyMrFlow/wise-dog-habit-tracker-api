@@ -12,4 +12,10 @@ public class AddStampToHabitHabitHttpPresenter : HttpPresenter<AddStampToHabitRe
 
     public void StampMustHaveValue() 
         => Result = new BadRequestObjectResult(new ValidationProblemDetails { Title = "Stamp must have a value." });
+
+    public void NotFound()
+        => Result = new NotFoundResult();
+
+    public void StampAlreadyExists()
+        => Result = new ConflictResult();
 }

@@ -4,6 +4,7 @@ using TWD.HabitTracker.Application.UseCases.Habits.AddOne;
 using TWD.HabitTracker.Application.UseCases.Habits.GetAll;
 using TWD.HabitTracker.Application.UseCases.Habits.GetOne;
 using TWD.HabitTracker.Application.UseCases.Habits.Stamps.AddOne;
+using TWD.HabitTracker.Application.UseCases.Habits.Stamps.RemoveOne;
 
 namespace TWD.HabitTracker.Api.Configurations.UseCases;
 
@@ -22,6 +23,7 @@ public static class UseCaseConfigurations
         
         // stamps
         services.AddScoped<AddStampToHabitInteractor>();
+        services.AddScoped<RemoveStampFromHabitInteractor>();
         
         return services;
     }

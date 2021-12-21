@@ -18,7 +18,7 @@ public class GetOneHabitInteractor : UseCaseInteractor<GetOneHabitRequest, GetOn
 
         try
         {
-            var habit = await _habitReadRepository.Get(Request.HabitId);
+            var habit = await _habitReadRepository.GetAsync(Request.HabitId);
             if (habit is null || habit.UserId != Request.LoggedUser.UserId)
             {
                 Presenter?.NotFound();
