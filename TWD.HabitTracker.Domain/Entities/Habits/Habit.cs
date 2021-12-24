@@ -6,33 +6,43 @@ namespace TWD.HabitTracker.Domain.Entities.Habits;
 
 public class Habit
 {
-    public Habit() { }
-    
-    public Habit(Guid id, Guid userId, string name, ICollection<Stamp> stamps, ICollection<Stamp> lastTenStamps)
+    public Habit(Guid id, Guid userId, string name, DateTime startDate, IEnumerable<DayOfWeek> weekDays, HabitObjective? objective, ICollection<Stamp> stamps, ICollection<Stamp> lastTenStamps)
     {
         Id = id;
         UserId = userId;
         Name = name;
+        StartDate = startDate;
+        WeekDays = new HashSet<DayOfWeek>(weekDays);
         _stamps = stamps;
         _lastTenStamps = lastTenStamps;
+        Objective = objective;
+    }
+    
+    public Habit(Guid userId, string name, DateTime startDate, IEnumerable<DayOfWeek> weekDays, HabitObjective? quantifiableObjective) 
+        : this(Guid.NewGuid(), userId, name, startDate, weekDays, quantifiableObjective, new List<Stamp>(), new List<Stamp>())
+    {
     }
 
-    public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid Id { get; }
 
-    public string Name { get; set; } = null!;
+    public string Name { get; set; }
     
     public Guid UserId { get; set; }
 
-    public QuantifiableObjective? QuantifiableObjective { get; set; }
+    public HabitObjective? Objective { get; set; }
     
-    public bool IsQuantifiable => QuantifiableObjective is not null;
+    public bool IsQuantifiable => Objective is not null;
 
-    private ICollection<Stamp> _stamps = new List<Stamp>();
+    public DateTime StartDate { get; set; }
+    
+    public HashSet<DayOfWeek> WeekDays { get; set; }
+
+    private readonly ICollection<Stamp> _stamps;
     public IEnumerable<Stamp> Stamps => _stamps;
 
-    private ICollection<Stamp> _lastTenStamps = new List<Stamp>(10);
+    private ICollection<Stamp> _lastTenStamps;
     public IEnumerable<Stamp> LastTenStamps => _lastTenStamps;
-
+    
     public void AddStamp(Stamp stamp)
     {
         if (_stamps.Any(s => s.Date == stamp.Date))
@@ -61,15 +71,4 @@ public class Habit
         if (_lastTenStamps.Any(s => s.Date == stampDate))
             _lastTenStamps = _stamps.OrderByDescending(s => s.Date).Take(10).ToList();
     }
-}
-
-public enum EDayOfWeek
-{
-    Monday,
-    Tuesday,
-    Wednesday,
-    Thursday,
-    Friday,
-    Saturday,
-    Sunday
 }

@@ -20,16 +20,11 @@ public class AddOneHabitInteractor : UseCaseInteractor<AddOneHabitRequest, AddOn
 
         var objective = Request.ObjectiveRequest is null
             ? null
-            : new QuantifiableObjective(Request.ObjectiveRequest.ObjectiveValue, Request.ObjectiveRequest.ObjectiveUnit);
+            : new HabitObjective(Request.ObjectiveRequest.ObjectiveValue, Request.ObjectiveRequest.ObjectiveUnit);
         
         try
         {
-            var habit = new Habit
-            {
-                UserId = Request.LoggedUser.UserId,
-                Name = Request.HabitName,
-                QuantifiableObjective = objective
-            };
+            var habit = new Habit(Request.LoggedUser.UserId, Request.HabitName, Request.StartDate, Request.WeekDays, objective);
 
             await _habitWriteRepository.AddAsync(habit);
             Presenter?.Success(new AddOneHabitResponse(habit));

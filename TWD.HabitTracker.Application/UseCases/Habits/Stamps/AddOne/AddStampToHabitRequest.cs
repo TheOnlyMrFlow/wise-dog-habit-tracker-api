@@ -4,7 +4,7 @@ namespace TWD.HabitTracker.Application.UseCases.Habits.Stamps.AddOne;
 
 public class AddStampToHabitRequest
 {
-    public AddStampToHabitRequest(LoggedUser loggedUser, Guid habitId, DateTime stampDate, decimal? stampValue)
+    public AddStampToHabitRequest(LoggedUser loggedUser, Guid habitId, DateTime stampDate, float? stampValue)
     {
         LoggedUser = loggedUser;
         HabitId = habitId;
@@ -14,5 +14,5 @@ public class AddStampToHabitRequest
     public LoggedUser LoggedUser { get; }
     public Guid HabitId { get; }
     public DateTime StampDate { get; }
-    public decimal? StampValue { get; }
+    public float? StampValue { get; }
 }

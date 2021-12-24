@@ -2,7 +2,7 @@
 
 public class Stamp
 {
-    public Stamp(DateTime date, decimal? value)
+    public Stamp(DateTime date, float? value)
     {
         Date = date;
         Value = value;
@@ -10,7 +10,7 @@ public class Stamp
 
     public DateTime Date { get; set; }
     
-    public decimal? Value { get; set; }
+    public float? Value { get; set; }
 
     public bool IsOlderThan(Stamp other)
         => Date < other.Date;

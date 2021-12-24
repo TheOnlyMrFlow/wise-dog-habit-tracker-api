@@ -4,7 +4,7 @@ namespace TWD.HabitTracker.Api.ViewModels.Habits.Stamps;
 
 public class StampViewModel
 {
-    public StampViewModel(DateTime date, decimal? value)
+    public StampViewModel(DateTime date, float? value)
     {
         Date = date;
         Value = value;
@@ -12,7 +12,7 @@ public class StampViewModel
 
     public DateTime Date { get; }
     
-    public decimal? Value { get; }
+    public float? Value { get; }
     
     public static StampViewModel FromDomainEntity(Stamp stamp)
         => new (stamp.Date, stamp.Value);

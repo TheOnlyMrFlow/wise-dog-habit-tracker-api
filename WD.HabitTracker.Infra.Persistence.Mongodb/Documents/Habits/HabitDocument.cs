@@ -3,15 +3,22 @@ using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using TWD.HabitTracker.Domain.Entities.Habits;
 using TWD.HabitTracker.Domain.Entities.Habits.Stamps;
+using TWD.HabitTracker.Domain.ValueObjects;
 
 namespace WD.HabitTracker.Infra.Persistence.Mongodb.Documents.Habits;
 
 public class HabitDocument
 {
-    public HabitDocument(MongoDBRef user, string name)
+    public HabitDocument(Habit habit)
     {
-        User = user;
-        Name = name;
+        User = new MongoDBRef("user", new BsonString(habit.UserId.ToString()));
+        Name = habit.Name;
+        StartDate = habit.StartDate;
+        WeekDays = habit.WeekDays.ToArray();
+        ObjectiveValue = habit.Objective?.Value;
+        ObjectiveUnit = habit.Objective?.Unit;
+        Stamps = habit.Stamps.Select(StampDocument.FromStamp).ToList();
+        LastTenStamps = habit.LastTenStamps.Select(StampDocument.FromStamp).ToList();
     }
 
     public int SchemaVersion { get; set; } = 1;
@@ -23,12 +30,18 @@ public class HabitDocument
     public MongoDBRef User { get; set; }
 
     public string Name { get; set; }
+    
+    public DateTime StartDate { get; set; }
+    
+    public DayOfWeek[] WeekDays { get; set; }
+    
+    public string? ObjectiveUnit { get; set; }
+    public float? ObjectiveValue { get; set; }
+    
+    public float? ValueSum { get; set; }
     public int OccurenceCount { get; set; } = 0;
     public int StampCount { get; set; } = 0;
     public int AboveObjectiveStampCount { get; set; } = 0;
-    public DateTime StartDate { get; set; }
-    public float? ValueSum { get; set; }
-    public float? Objective { get; set; }
 
     public List<StampDocument> Stamps { get; set; } = new();
 
@@ -40,33 +53,24 @@ public class HabitDocument
             Id,
             new Guid(User.Id.ToString()!),
             Name,
+            StartDate,
+            WeekDays,
+            ObjectiveValue.HasValue ? new HabitObjective(ObjectiveValue.Value, ObjectiveUnit) : null,
             Stamps.Select(s => s.ToStamp()).ToList(),
             LastTenStamps.Select(s => s.ToStamp()).ToList());
-    }
-
-    public static HabitDocument FromHabit(Habit habit)
-    {
-        var stampDocuments = habit.Stamps.Select(StampDocument.FromStamp).ToList();
-        var lastTenStampDocuments = habit.LastTenStamps.Select(StampDocument.FromStamp).ToList();
-        
-        return new(new MongoDBRef("user", new BsonString(habit.UserId.ToString())), habit.Name)
-        {
-            Stamps = stampDocuments,
-            LastTenStamps = lastTenStampDocuments
-        };
     }
 }
 
 public class StampDocument
 {
-    public StampDocument(DateTime date, decimal? value)
+    public StampDocument(DateTime date, float? value)
     {
         Date = date;
         Value = value;
     }
     
     public DateTime Date { get; set; }
-    public decimal? Value { get; set; }
+    public float? Value { get; set; }
 
     public static StampDocument FromStamp(Stamp stamp)
         => new StampDocument(stamp.Date, stamp.Value);

@@ -9,7 +9,7 @@ public class AddStampToHabitHttpHttpBody
 {
     [Required] public DateTime Date { get; set; }
     
-    public decimal Value { get; set; }
+    public float Value { get; set; }
     
     public AddStampToHabitRequest ToApplicationRequest(LoggedUser loggedUser, Guid habitId) => new(loggedUser, habitId, Date, Value);
 }

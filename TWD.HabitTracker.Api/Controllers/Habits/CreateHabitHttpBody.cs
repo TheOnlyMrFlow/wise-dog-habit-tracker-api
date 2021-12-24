@@ -8,14 +8,16 @@ public class CreateHabitHttpBody
 {
     public class CreateHabitObjectiveHttpRequestBody
     {
-        [Required] public decimal Value { get; set; }
+        [Required] public float? Value { get; set; } = null!;
         public string? Unit { get; set; }
         
-        public AddOneHabitRequest.AddOneHabitObjectiveRequest ToApplicationRequest() => new(Value, Unit);
+        public AddOneHabitRequest.AddOneHabitObjectiveRequest ToApplicationRequest() => new(Value.Value, Unit);
     }
     
     [Required] public string Name { get; set; } = null!;
     public CreateHabitObjectiveHttpRequestBody? Objective { get; set; }
-    
-    public AddOneHabitRequest ToApplicationRequest(LoggedUser loggedUser) => new(loggedUser, Name, Objective?.ToApplicationRequest());
+    [Required] public IEnumerable<DayOfWeek> WeekDays { get; set; } = null!;
+    [Required] public DateTime? StartDate { get; set; } = null!;
+
+    public AddOneHabitRequest ToApplicationRequest(LoggedUser loggedUser) => new(loggedUser, Name, StartDate.Value, WeekDays, Objective?.ToApplicationRequest());
 }

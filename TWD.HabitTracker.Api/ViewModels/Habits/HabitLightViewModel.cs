@@ -10,6 +10,8 @@ public class HabitLightViewModel
         Id = domainHabit.Id;
         Name = domainHabit.Name;
         LastTenStamps = domainHabit.LastTenStamps.Select(StampViewModel.FromDomainEntity);
+        WeekDays = domainHabit.WeekDays;
+        Objective = domainHabit.Objective is null ? null : new ObjectiveViewModel(domainHabit.Objective);
     }
     
     public Guid Id { get; }
@@ -17,4 +19,8 @@ public class HabitLightViewModel
     public string Name { get; }
     
     public IEnumerable<StampViewModel> LastTenStamps { get; }
+    
+    public IEnumerable<DayOfWeek> WeekDays { get; }
+    
+    public ObjectiveViewModel? Objective { get; set; }
 }
