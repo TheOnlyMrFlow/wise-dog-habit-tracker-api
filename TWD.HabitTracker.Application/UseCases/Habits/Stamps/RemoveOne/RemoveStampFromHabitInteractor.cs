@@ -39,9 +39,5 @@ public class RemoveStampFromHabitInteractor : UseCaseInteractor<RemoveStampFromH
         {
             Presenter?.NotFound();
         }
-        catch (Exception e)
-        {
-            Presenter?.UnknownError();
-        }
     }
 }

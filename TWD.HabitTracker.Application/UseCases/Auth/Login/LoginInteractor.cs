@@ -18,26 +18,17 @@ public class LoginInteractor : UseCaseInteractor<LoginRequest, LoginResponse, IL
     public override async Task InvokeAsync()
     {
         if (Request is null) throw new ArgumentNullException(nameof(Request));
+        
+        var user = await _userReadRepository.FindByDeviceTokenAsync(Request.DeviceToken);
 
-        try
+        if (user is null)
         {
-            var user = await _userReadRepository.FindByDeviceTokenAsync(Request.DeviceToken);
-
-            if (user is null)
-            {
-                Presenter?.Forbid();
-                return;
-            }
-
-            var jwt = _jwtManager.BuildForDeviceAuth(user);
-            
-            Presenter?.Success(new LoginResponse(jwt));
+            Presenter?.Forbid();
+            return;
         }
-        catch (Exception e)
-        {
-            Presenter?.UnknownError();
 
-            throw;
-        }
+        var jwt = _jwtManager.BuildForDeviceAuth(user);
+        
+        Presenter?.Success(new LoginResponse(jwt));
     }
 }

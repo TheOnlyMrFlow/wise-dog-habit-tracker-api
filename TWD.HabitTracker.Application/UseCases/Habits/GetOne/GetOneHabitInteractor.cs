@@ -15,21 +15,13 @@ public class GetOneHabitInteractor : UseCaseInteractor<GetOneHabitRequest, GetOn
     public override async Task InvokeAsync()
     {
         if (Request is null) throw new ArgumentNullException(nameof(Request));
-
-        try
+        var habit = await _habitReadRepository.GetAsync(Request.HabitId);
+        if (habit is null || habit.UserId != Request.LoggedUser.UserId)
         {
-            var habit = await _habitReadRepository.GetAsync(Request.HabitId);
-            if (habit is null || habit.UserId != Request.LoggedUser.UserId)
-            {
-                Presenter?.NotFound();
-                return;
-            }
-            
-            Presenter?.Success(new GetOneHabitResponse(habit));
-        } 
-        catch (Exception e)
-        {
-            Presenter?.UnknownError();
+            Presenter?.NotFound();
+            return;
         }
+        
+        Presenter?.Success(new GetOneHabitResponse(habit));
     }
 }

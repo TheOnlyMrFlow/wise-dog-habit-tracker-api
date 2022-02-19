@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using TWD.HabitTracker.Api.Configurations.Auth;
 using TWD.HabitTracker.Api.Configurations.Persistence;
 using TWD.HabitTracker.Api.Configurations.UseCases;
+using TWD.HabitTracker.Api.Middlewares;
+using TWD.HabitTracker.Api.Middlewares.ErrorHandling;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,7 @@ builder.Services
     .AddEndpointsApiExplorer()
     .AddPersistenceServices(builder.Configuration)
     .AddAuthServices(builder.Configuration)
+    .AddLogging(logging => logging.AddConsole())
     .AddUseCases()
     .AddControllers();
 
@@ -20,6 +23,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    
+    app.UseMiddleware<DevelopmentGlobalErrorHandlingMiddleware>();
+}
+else
+{
+    app.UseMiddleware<ProductionGlobalErrorHandlingMiddleware>();
 }
 
 app.UseCors(policyBuilder => policyBuilder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
@@ -31,5 +40,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();

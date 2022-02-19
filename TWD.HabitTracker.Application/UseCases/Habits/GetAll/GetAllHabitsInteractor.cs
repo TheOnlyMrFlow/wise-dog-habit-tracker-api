@@ -15,16 +15,9 @@ public class GetAllHabitsInteractor : UseCaseInteractor<GetAllHabitsRequest, Get
     public override Task InvokeAsync()
     {
         if (Request is null) throw new ArgumentNullException(nameof(Request));
-
-        try
-        {
-            var habits = _habitReadRepository.GetAll(Request.LoggedUser.UserId);
-            Presenter?.Success(new GetAllHabitsResponse(habits));
-        }
-        catch (Exception e)
-        {
-            Presenter?.UnknownError();
-        }
+    
+        var habits = _habitReadRepository.GetAll(Request.LoggedUser.UserId);
+        Presenter?.Success(new GetAllHabitsResponse(habits));
 
         return Task.CompletedTask;
     }

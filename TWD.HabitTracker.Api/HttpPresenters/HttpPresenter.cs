@@ -8,6 +8,4 @@ public abstract class HttpPresenter<T> : IUseCasePresenter<T> where T : IUseCase
     public IActionResult? Result { get; protected set; }
 
     public abstract void Success(T response);
-
-    public void UnknownError() => Result = new StatusCodeResult(500);
 }

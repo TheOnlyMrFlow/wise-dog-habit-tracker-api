@@ -44,9 +44,5 @@ public class AddStampToHabitInteractor : UseCaseInteractor<AddStampToHabitReques
         {
             Presenter?.StampAlreadyExists();
         }
-        catch (Exception e)
-        {
-            Presenter?.UnknownError();
-        }
     }
 }

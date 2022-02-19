@@ -20,30 +20,22 @@ public class SignupInteractor : UseCaseInteractor<SignupRequest, SignupResponse,
     public override async Task InvokeAsync()
     {
         if (Request is null) throw new ArgumentNullException(nameof(Request));
+        
+        var deviceToken = string.Join(
+                "",
+                Enumerable
+                    .Repeat(0, 8)
+                    .Select(_ => Convert.ToBase64String(Guid.NewGuid().ToByteArray())))
+            .Replace("=", "");
 
-        try
-        {
-            var deviceToken = string.Join(
-                    "",
-                    Enumerable
-                        .Repeat(0, 8)
-                        .Select(_ => Convert.ToBase64String(Guid.NewGuid().ToByteArray())))
-                .Replace("=", "");
+        var authInfo = new AuthInfo();
 
-            var authInfo = new AuthInfo();
+        authInfo.DeviceAuth = new DeviceAuth(deviceToken);
 
-            authInfo.DeviceAuth = new DeviceAuth(deviceToken);
+        var user = new User(authInfo);
 
-            var user = new User(authInfo);
-
-            await _userWriteRepository.AddAsync(user);
-            Presenter?.Success(new SignupResponse(deviceToken));
-        }
-        catch (Exception e)
-        {
-            Presenter?.UnknownError();
-
-            throw;
-        }
+        await _userWriteRepository.AddAsync(user);
+        Presenter?.Success(new SignupResponse(deviceToken));
+    
     }
 }

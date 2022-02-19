@@ -21,19 +21,10 @@ public class AddOneHabitInteractor : UseCaseInteractor<AddOneHabitRequest, AddOn
         var objective = Request.ObjectiveRequest is null
             ? null
             : new HabitObjective(Request.ObjectiveRequest.ObjectiveValue, Request.ObjectiveRequest.ObjectiveUnit);
-        
-        try
-        {
-            var habit = new Habit(Request.LoggedUser.UserId, Request.HabitName, Request.StartDate, Request.WeekDays, objective);
+    
+        var habit = new Habit(Request.LoggedUser.UserId, Request.HabitName, Request.StartDate, Request.WeekDays, objective);
 
-            await _habitWriteRepository.AddAsync(habit);
-            Presenter?.Success(new AddOneHabitResponse(habit));
-        }
-        catch (Exception e)
-        {
-            Presenter?.UnknownError();
-
-            throw;
-        }
+        await _habitWriteRepository.AddAsync(habit);
+        Presenter?.Success(new AddOneHabitResponse(habit));
     }
 }
