@@ -39,8 +39,6 @@ public class HabitDocument
     public float? ObjectiveValue { get; set; }
     
     public float? ValueSum { get; set; }
-    public int OccurenceCount { get; set; } = 0;
-    public int StampCount { get; set; } = 0;
     public int AboveObjectiveStampCount { get; set; } = 0;
 
     public List<StampDocument> Stamps { get; set; } = new();

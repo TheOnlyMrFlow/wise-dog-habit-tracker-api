@@ -11,7 +11,7 @@ public class CreateHabitHttpBody
         [Required] public float? Value { get; set; } = null!;
         public string? Unit { get; set; }
         
-        public AddOneHabitRequest.AddOneHabitObjectiveRequest ToApplicationRequest() => new(Value.Value, Unit);
+        public AddOneHabitRequest.AddOneHabitObjectiveRequest ToApplicationRequest() => new(Value!.Value, Unit);
     }
     
     [Required] public string Name { get; set; } = null!;
@@ -19,5 +19,5 @@ public class CreateHabitHttpBody
     [Required] public IEnumerable<DayOfWeek> WeekDays { get; set; } = null!;
     [Required] public DateTime? StartDate { get; set; } = null!;
 
-    public AddOneHabitRequest ToApplicationRequest(LoggedUser loggedUser) => new(loggedUser, Name, StartDate.Value, WeekDays, Objective?.ToApplicationRequest());
+    public AddOneHabitRequest ToApplicationRequest(LoggedUser loggedUser) => new(loggedUser, Name, StartDate!.Value, WeekDays, Objective?.ToApplicationRequest());
 }
