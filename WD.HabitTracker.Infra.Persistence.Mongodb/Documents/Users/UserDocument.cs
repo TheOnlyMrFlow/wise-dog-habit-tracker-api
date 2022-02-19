@@ -4,6 +4,7 @@ using WD.HabitTracker.Infra.Persistence.Mongodb.Documents.Users.Auth;
 
 namespace WD.HabitTracker.Infra.Persistence.Mongodb.Documents.Users;
 
+[BsonIgnoreExtraElements]
 public class UserDocument
 {
     public UserDocument(User user)

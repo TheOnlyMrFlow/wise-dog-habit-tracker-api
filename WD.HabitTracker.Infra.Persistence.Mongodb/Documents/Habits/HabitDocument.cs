@@ -7,6 +7,7 @@ using TWD.HabitTracker.Domain.ValueObjects;
 
 namespace WD.HabitTracker.Infra.Persistence.Mongodb.Documents.Habits;
 
+[BsonIgnoreExtraElements]
 public class HabitDocument
 {
     public HabitDocument(Habit habit)
