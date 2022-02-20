@@ -1,7 +1,7 @@
 ﻿using TWD.HabitTracker.Application.Common;
 using TWD.HabitTracker.Application.Infra.Persistence.Habits;
-using TWD.HabitTracker.Domain.Entities.Habits.Stamps;
 using TWD.HabitTracker.Domain.Exceptions;
+using TWD.HabitTracker.Domain.ValueObjects.Stamp;
 
 namespace TWD.HabitTracker.Application.UseCases.Habits.Stamps.AddOne;
 

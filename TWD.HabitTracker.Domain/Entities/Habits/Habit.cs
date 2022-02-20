@@ -1,6 +1,6 @@
-﻿using TWD.HabitTracker.Domain.Entities.Habits.Stamps;
-using TWD.HabitTracker.Domain.Exceptions;
+﻿using TWD.HabitTracker.Domain.Exceptions;
 using TWD.HabitTracker.Domain.ValueObjects;
+using TWD.HabitTracker.Domain.ValueObjects.Stamp;
 
 namespace TWD.HabitTracker.Domain.Entities.Habits;
 

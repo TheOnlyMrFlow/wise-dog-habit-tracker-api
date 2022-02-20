@@ -1,4 +1,4 @@
-﻿using TWD.HabitTracker.Domain.Entities.Habits.Stamps;
+﻿using TWD.HabitTracker.Domain.ValueObjects.Stamp;
 
 namespace TWD.HabitTracker.Api.ViewModels.Habits.Stamps;
 

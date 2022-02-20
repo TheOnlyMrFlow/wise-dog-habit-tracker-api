@@ -2,8 +2,8 @@
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using TWD.HabitTracker.Domain.Entities.Habits;
-using TWD.HabitTracker.Domain.Entities.Habits.Stamps;
 using TWD.HabitTracker.Domain.ValueObjects;
+using TWD.HabitTracker.Domain.ValueObjects.Stamp;
 
 namespace WD.HabitTracker.Infra.Persistence.Mongodb.Documents.Habits;
 
