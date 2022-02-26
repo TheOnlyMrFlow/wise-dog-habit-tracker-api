@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Controllers\LoginController.fs" />
+        <Compile Include="Program.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\WD.HabitTracker.Application\WD.HabitTracker.Application.fsproj" />
+      <ProjectReference Include="..\WD.HabitTracker.Persistence.MongoDb\WD.HabitTracker.Persistence.MongoDb.fsproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    </ItemGroup>
+
+</Project>

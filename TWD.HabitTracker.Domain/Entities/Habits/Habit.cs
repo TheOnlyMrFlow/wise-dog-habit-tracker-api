@@ -1,4 +1,6 @@
-﻿using TWD.HabitTracker.Domain.Exceptions;
+﻿using TWD.HabitTracker.Domain.Common;
+using TWD.HabitTracker.Domain.Entities.Habits.Errors;
+using TWD.HabitTracker.Domain.Exceptions;
 using TWD.HabitTracker.Domain.ValueObjects;
 using TWD.HabitTracker.Domain.ValueObjects.Stamp;
 
@@ -42,14 +44,14 @@ public class Habit
 
     private ICollection<Stamp> _lastTenStamps;
     public IEnumerable<Stamp> LastTenStamps => _lastTenStamps;
-    
-    public void AddStamp(Stamp stamp)
+
+    public Either<AddStampError, Habit> AddStamp(Stamp stamp)
     {
         if (_stamps.Any(s => s.Date == stamp.Date))
-            throw new StampAlreadyExistsException();
-        
+            return new Either<AddStampError, Habit>(AddStampError.StampAlreadyExists());
+
         if (IsQuantifiable && !stamp.Value.HasValue)
-            throw new StampMustHaveValueException();
+            return new Either<AddStampError, Habit>(AddStampError.StampMushHaveValue());
         
         _stamps.Add(stamp);
 
@@ -58,6 +60,8 @@ public class Habit
         
         else if (_lastTenStamps.Any(s => s.IsOlderThan(s)))
             _lastTenStamps = _stamps.OrderByDescending(s => s.Date).Take(10).ToList();
+
+        return new Either<AddStampError, Habit>(this);
     }
 
     public void RemoveStamp(DateTime stampDate)

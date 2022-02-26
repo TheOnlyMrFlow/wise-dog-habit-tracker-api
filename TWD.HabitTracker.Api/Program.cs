@@ -1,8 +1,6 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using TWD.HabitTracker.Api.Configurations.Auth;
 using TWD.HabitTracker.Api.Configurations.Persistence;
 using TWD.HabitTracker.Api.Configurations.UseCases;
-using TWD.HabitTracker.Api.Middlewares;
 using TWD.HabitTracker.Api.Middlewares.ErrorHandling;
 
 var builder = WebApplication.CreateBuilder(args);

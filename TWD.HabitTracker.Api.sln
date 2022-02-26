@@ -10,6 +10,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WD.HabitTracker.Infra.Persi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WD.HabitTracker.Authentication", "WD.HabitTracker.Authentication\WD.HabitTracker.Authentication.csproj", "{5300B67D-024A-42D6-9258-BA3D45724D1B}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WD.HabitTracker.Domain", "WD.HabitTracker.Domain\WD.HabitTracker.Domain.fsproj", "{A955EE4E-7485-4F59-AB8F-F865361F17E0}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WD.HabitTracker.Application", "WD.HabitTracker.Application\WD.HabitTracker.Application.fsproj", "{987FE98F-692B-4C08-BAD6-D6D79CD2EB79}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WD.HabitTracker.Api", "WD.HabitTracker.Api\WD.HabitTracker.Api.fsproj", "{F2E02E96-095F-4137-8DB5-FF5F8CF61F0A}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WD.HabitTracker.Persistence.MongoDb", "WD.HabitTracker.Persistence.MongoDb\WD.HabitTracker.Persistence.MongoDb.fsproj", "{FA789B77-828D-42F5-BF7C-A9117B8C051E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharp", "CSharp", "{06A9483C-3B9C-46FC-A94C-C3A39FAB9CFD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +46,28 @@ Global
 		{5300B67D-024A-42D6-9258-BA3D45724D1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5300B67D-024A-42D6-9258-BA3D45724D1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5300B67D-024A-42D6-9258-BA3D45724D1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A955EE4E-7485-4F59-AB8F-F865361F17E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A955EE4E-7485-4F59-AB8F-F865361F17E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A955EE4E-7485-4F59-AB8F-F865361F17E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A955EE4E-7485-4F59-AB8F-F865361F17E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{987FE98F-692B-4C08-BAD6-D6D79CD2EB79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{987FE98F-692B-4C08-BAD6-D6D79CD2EB79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{987FE98F-692B-4C08-BAD6-D6D79CD2EB79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{987FE98F-692B-4C08-BAD6-D6D79CD2EB79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2E02E96-095F-4137-8DB5-FF5F8CF61F0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2E02E96-095F-4137-8DB5-FF5F8CF61F0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2E02E96-095F-4137-8DB5-FF5F8CF61F0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2E02E96-095F-4137-8DB5-FF5F8CF61F0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA789B77-828D-42F5-BF7C-A9117B8C051E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA789B77-828D-42F5-BF7C-A9117B8C051E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA789B77-828D-42F5-BF7C-A9117B8C051E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA789B77-828D-42F5-BF7C-A9117B8C051E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F768D42E-9E88-40A7-AC0B-106B0CBACE5C} = {06A9483C-3B9C-46FC-A94C-C3A39FAB9CFD}
+		{325CD275-6650-470B-99A2-F29E6EF8FE99} = {06A9483C-3B9C-46FC-A94C-C3A39FAB9CFD}
+		{5168D156-6530-428D-89AB-E578D92CBFCB} = {06A9483C-3B9C-46FC-A94C-C3A39FAB9CFD}
+		{5300B67D-024A-42D6-9258-BA3D45724D1B} = {06A9483C-3B9C-46FC-A94C-C3A39FAB9CFD}
+		{D49576F5-9E68-472A-BAAA-D1761BF74C51} = {06A9483C-3B9C-46FC-A94C-C3A39FAB9CFD}
 	EndGlobalSection
 EndGlobal
