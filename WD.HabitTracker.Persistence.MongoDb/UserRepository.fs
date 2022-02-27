@@ -1,8 +1,12 @@
 ﻿namespace WD.HabitTracker.Persistence.MongoDb
 
+open System.Threading.Tasks
+open Microsoft.FSharp.Control
+open MongoDB.Driver
 open WD.HabitTracker.Application.Services.Persistence
 open WD.HabitTracker.Application.Services.Persistence.PersistenceServices.CommonErrors
 open WD.HabitTracker.Domain.Users
+open WD.HabitTracker.Persistence.MongoDb.Documents
 
 type UserRepository(client: HabitTrackerMongoDatabase) =
     let habitCollection = client.GetHabitCollection ()
@@ -11,8 +15,11 @@ type UserRepository(client: HabitTrackerMongoDatabase) =
         member this.FindUserByDeviceTokenAsync(deviceToken) = async {
             try 
                 do! Async.Sleep(100)
-//                let! habit = habitCollection.FindAsync()  
-                return {AuthenticationMean = Device {DeviceToken = deviceToken} } |> Some |> Ok
+//                let habitRes = FilterDefinition<HabitDocument>.Empty |> habitCollection.Find
+//                let habit = habitRes.Skip(1).First ()
+                let! h = habitCollection.FindAsync<HabitDocument>(FilterDefinition<HabitDocument>.Empty) |> Async.AwaitTask
+                let hh = h.First()
+                return {AuthenticationMean = Device {DeviceToken = $"lol{hh.Name}" }} |> Some |> Ok
             with
             | _ -> return "Something terrible happened" |> PersistenceError |> Error
         }

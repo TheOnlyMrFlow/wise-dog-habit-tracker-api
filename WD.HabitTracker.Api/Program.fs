@@ -3,6 +3,7 @@ namespace WD.HabitTracker.Api
 open Microsoft.AspNetCore.Builder
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Hosting
+open Microsoft.Extensions.Options
 open WD.HabitTracker.Application.Services.Persistence
 open WD.HabitTracker.Persistence.MongoDb
 
@@ -16,7 +17,13 @@ module Program =
 
         builder.Services.AddSwaggerGen()
         builder.Services.AddControllers()
-        builder.Services.AddTransient<IUserReadRepository, UserRepository>();  
+        
+        builder.Services
+            .Configure<HabitTrackerMongoDatabaseSettings>(builder.Configuration.GetSection("MongoDatabaseSettings"))
+            .AddSingleton<HabitTrackerMongoDatabaseSettings>(fun sp -> sp.GetRequiredService<IOptions<HabitTrackerMongoDatabaseSettings>>().Value)
+            
+        builder.Services.AddSingleton<HabitTrackerMongoDatabase>()
+        builder.Services.AddTransient<IUserReadRepository, UserRepository>()
 
         let app = builder.Build()
         

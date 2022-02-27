@@ -4,8 +4,8 @@ open System
 open MongoDB.Bson.Serialization.Attributes
 open MongoDB.Driver
 
-[<CLIMutable>]
 [<BsonIgnoreExtraElements>]
+[<CLIMutable>]
 type StampDocument = {
 //    public StampDocument(DateTime date, float? value)
 //    {
@@ -14,7 +14,7 @@ type StampDocument = {
 //    }
     
     Date: DateTime
-    Value: float option
+    [<BsonIgnoreIfNull>] Value: float
 
 //    public static StampDocument FromStamp(Stamp stamp)
 //        => new StampDocument(stamp.Date, stamp.Value);
@@ -23,8 +23,8 @@ type StampDocument = {
 //        => new Stamp(Date, Value);1
 }
 
-[<CLIMutable>]
 [<BsonIgnoreExtraElements>]
+[<CLIMutable>]
 type HabitDocument = {
 
 //    public HabitDocument(Habit habit)
@@ -45,12 +45,12 @@ type HabitDocument = {
     Name: string    
     StartDate: DateTime    
     WeekDays: DayOfWeek[]
-    ObjectiveUnit: string option
-    ObjectiveValue: float option
-    ValueSum: float option
+    ObjectiveUnit: string
+    [<BsonIgnoreIfNull>] ObjectiveValue: float
+    [<BsonIgnoreIfNull>] ValueSum: Nullable<float>
     AboveObjectiveStampCount: int
-    Stamps: List<StampDocument>
-    LastTenStamps: List<StampDocument>
+    Stamps: System.Collections.Generic.List<StampDocument>
+    LastTenStamps: System.Collections.Generic.List<StampDocument>
 
 //    public Habit ToHabit()
 //    {
