@@ -20,6 +20,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WD.HabitTracker.Persistence
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharp", "CSharp", "{06A9483C-3B9C-46FC-A94C-C3A39FAB9CFD}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WD.HabitTracker.Auth", "WD.HabitTracker.Auth\WD.HabitTracker.Auth.fsproj", "{F6C26651-1E2B-4C5E-B372-0C2C0045E6D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{FA789B77-828D-42F5-BF7C-A9117B8C051E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA789B77-828D-42F5-BF7C-A9117B8C051E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA789B77-828D-42F5-BF7C-A9117B8C051E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6C26651-1E2B-4C5E-B372-0C2C0045E6D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6C26651-1E2B-4C5E-B372-0C2C0045E6D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6C26651-1E2B-4C5E-B372-0C2C0045E6D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6C26651-1E2B-4C5E-B372-0C2C0045E6D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F768D42E-9E88-40A7-AC0B-106B0CBACE5C} = {06A9483C-3B9C-46FC-A94C-C3A39FAB9CFD}

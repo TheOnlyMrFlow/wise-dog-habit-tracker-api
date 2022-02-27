@@ -1,5 +1,7 @@
 ﻿module WD.HabitTracker.Domain.Users
 
+open System
+
 type DeviceToken = string
 
 type DeviceAuthenticationMean = {
@@ -20,10 +22,7 @@ type AuthenticationMean =
     | Credentials of CredentialsAuthenticationMean
 
 type User = {
+    Id: Guid
     AuthenticationMean: AuthenticationMean
 //    Habits: Habit list
 }
-
-type Toto = Toto of Toto
-
-let someUser = {AuthenticationMean = Device {DeviceToken = "toto"}}

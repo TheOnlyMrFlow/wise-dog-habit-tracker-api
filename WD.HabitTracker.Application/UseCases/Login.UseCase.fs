@@ -1,5 +1,6 @@
 ﻿module WD.HabitTracker.Application.LoginWithDeviceUseCase
 
+open WD.HabitTracker.Application.Services.Authentication
 open WD.HabitTracker.Application.Services.Persistence
 
 
@@ -16,13 +17,13 @@ type LoginWithDeviceResult =
     | WrongDeviceToken
     | UndisclosedError
     
-let loginWithDeviceAsync (userReadRepository: IUserReadRepository ) input : Async<LoginWithDeviceResult> =
+let loginWithDeviceAsync (userReadRepository: IUserReadRepository) (jwtManager: IJwtManager) input : Async<LoginWithDeviceResult> =
     async {
         let! findUserResult = userReadRepository.FindUserByDeviceTokenAsync input.DeviceToken
         return match findUserResult with
                 | Ok maybeUser ->
                     match maybeUser with
-                      | Some user -> Success {JwtToken = "toto"}
+                      | Some user -> Success {JwtToken = jwtManager.GenerateForDeviceAuth user}
                       | _ -> WrongDeviceToken
                 | Error persistenceError -> UndisclosedError
     }

@@ -3,6 +3,7 @@
 open Microsoft.AspNetCore.Mvc
 open Microsoft.Extensions.Logging
 open WD.HabitTracker.Application.LoginWithDeviceUseCase
+open WD.HabitTracker.Application.Services.Authentication
 open WD.HabitTracker.Application.Services.Persistence
 
 type SuccessHttpResponse = {
@@ -26,9 +27,9 @@ type LoginController (logger : ILogger<LoginController>) =
     inherit ControllerBase()
     
     [<HttpPost>]
-    member this.PostLoginAsync([<FromServices>] userReadRepository: IUserReadRepository, [<FromBody>] requestBody: RequestBody) = async {
+    member this.LoginAsync([<FromServices>] userReadRepository: IUserReadRepository, [<FromServices>] jwtManager: IJwtManager, [<FromBody>] requestBody: RequestBody) = async {
         let useCaseInput: LoginWithDeviceInput = {DeviceToken = requestBody.DeviceToken}
-        let! useCaseResult = loginWithDeviceAsync userReadRepository useCaseInput 
+        let! useCaseResult = loginWithDeviceAsync userReadRepository jwtManager useCaseInput 
         return match useCaseResult with
         | Success successResult -> this.Ok { Jwt = successResult.JwtToken } :> IActionResult
         | WrongDeviceToken -> this.Forbid () :> IActionResult

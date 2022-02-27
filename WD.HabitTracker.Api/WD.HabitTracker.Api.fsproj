@@ -11,6 +11,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\WD.HabitTracker.Application\WD.HabitTracker.Application.fsproj" />
+      <ProjectReference Include="..\WD.HabitTracker.Auth\WD.HabitTracker.Auth.fsproj" />
       <ProjectReference Include="..\WD.HabitTracker.Persistence.MongoDb\WD.HabitTracker.Persistence.MongoDb.fsproj" />
     </ItemGroup>
 

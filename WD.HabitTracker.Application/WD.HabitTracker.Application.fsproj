@@ -8,6 +8,7 @@
     <ItemGroup>
         <Compile Include="Services\Persistence\PersistenceServices.CommonErrors.fs" />
         <Compile Include="Services\Persistence\UserReadRepository.Service.fs" />
+        <Compile Include="Services\Authentication\IJwtManager.fs" />
         <Compile Include="UseCases\Login.UseCase.fs" />
     </ItemGroup>
 

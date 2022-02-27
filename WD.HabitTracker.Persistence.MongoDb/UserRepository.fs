@@ -19,7 +19,10 @@ type UserRepository(client: HabitTrackerMongoDatabase) =
 //                let habit = habitRes.Skip(1).First ()
                 let! h = habitCollection.FindAsync<HabitDocument>(FilterDefinition<HabitDocument>.Empty) |> Async.AwaitTask
                 let hh = h.First()
-                return {AuthenticationMean = Device {DeviceToken = $"lol{hh.Name}" }} |> Some |> Ok
+                return {
+                    Id = hh.Id
+                    AuthenticationMean = Device {DeviceToken = $"lol{hh.Name}" }
+                } |> Some |> Ok
             with
             | _ -> return "Something terrible happened" |> PersistenceError |> Error
         }

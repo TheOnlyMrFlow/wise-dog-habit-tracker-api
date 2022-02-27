@@ -4,7 +4,9 @@ open Microsoft.AspNetCore.Builder
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Hosting
 open Microsoft.Extensions.Options
+open WD.HabitTracker.Application.Services.Authentication
 open WD.HabitTracker.Application.Services.Persistence
+open WD.HabitTracker.Auth
 open WD.HabitTracker.Persistence.MongoDb
 
 module Program =
@@ -21,9 +23,15 @@ module Program =
         builder.Services
             .Configure<HabitTrackerMongoDatabaseSettings>(builder.Configuration.GetSection("MongoDatabaseSettings"))
             .AddSingleton<HabitTrackerMongoDatabaseSettings>(fun sp -> sp.GetRequiredService<IOptions<HabitTrackerMongoDatabaseSettings>>().Value)
+        
+        builder.Services
+            .Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfig"))
+            .AddSingleton<JwtConfig>(fun sp -> sp.GetRequiredService<IOptions<JwtConfig>>().Value)
             
         builder.Services.AddSingleton<HabitTrackerMongoDatabase>()
         builder.Services.AddTransient<IUserReadRepository, UserRepository>()
+        
+        builder.Services.AddTransient<IJwtManager, JwtManager>()
 
         let app = builder.Build()
         
