@@ -7,6 +7,7 @@
 
     <ItemGroup>
         <Compile Include="Documents\Habit.Document.fs" />
+        <Compile Include="Documents\User.Document.fs" />
         <Compile Include="HabitTrackerMongoDatabaseSettings.fs" />
         <Compile Include="HabitTrackerMongoDatabase.fs" />
         <Compile Include="UserRepository.fs" />

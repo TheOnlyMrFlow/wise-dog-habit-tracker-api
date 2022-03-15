@@ -21,9 +21,8 @@ let loginWithDeviceAsync (userReadRepository: IUserReadRepository) (jwtManager: 
     async {
         let! findUserResult = userReadRepository.FindUserByDeviceTokenAsync input.DeviceToken
         return match findUserResult with
-                | Ok maybeUser ->
-                    match maybeUser with
-                      | Some user -> Success {JwtToken = jwtManager.GenerateForDeviceAuth user}
-                      | _ -> WrongDeviceToken
-                | Error persistenceError -> UndisclosedError
+                | Some user -> Success {JwtToken = jwtManager.GenerateForDeviceAuth user}
+                | _ -> WrongDeviceToken
+                      
     }
+ 

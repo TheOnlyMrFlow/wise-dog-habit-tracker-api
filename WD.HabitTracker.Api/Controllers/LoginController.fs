@@ -10,13 +10,6 @@ type SuccessHttpResponse = {
     Jwt: string
 }
 
-//
-//type wrongDeviceTokenHttpResponse = {
-//    JwtToken: string
-//}
-//
-//type LoginControllerHttpResponse =
-
 type RequestBody = {
     DeviceToken: string
 }
@@ -31,7 +24,7 @@ type LoginController (logger : ILogger<LoginController>) =
         let useCaseInput: LoginWithDeviceInput = {DeviceToken = requestBody.DeviceToken}
         let! useCaseResult = loginWithDeviceAsync userReadRepository jwtManager useCaseInput 
         return match useCaseResult with
-        | Success successResult -> this.Ok { Jwt = successResult.JwtToken } :> IActionResult
-        | WrongDeviceToken -> this.Forbid () :> IActionResult
-        | UndisclosedError -> this.StatusCode 500
+                | Success successResult -> this.Ok { Jwt = successResult.JwtToken } :> IActionResult
+                | WrongDeviceToken -> this.StatusCode(403) :> IActionResult
+                | UndisclosedError -> this.StatusCode 500
     }

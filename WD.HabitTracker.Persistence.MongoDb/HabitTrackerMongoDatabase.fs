@@ -7,3 +7,4 @@ type HabitTrackerMongoDatabase(settings: HabitTrackerMongoDatabaseSettings) =
     let database = MongoClient(settings.ConnectionString).GetDatabase(settings.DatabaseName)
     
     member this.GetHabitCollection = fun () -> database.GetCollection<HabitDocument>(settings.HabitsCollectionName)
+    member this.GetUserCollection = fun () -> database.GetCollection<UserDocument>(settings.UsersCollectionName)
