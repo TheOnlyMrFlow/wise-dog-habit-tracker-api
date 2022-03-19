@@ -9,6 +9,7 @@
     <ItemGroup>
       <PackageReference Include="DomainValidationCore" Version="1.1.1" />
       <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="6.0.0" />
+      <PackageReference Include="OneOf" Version="3.0.216" />
     </ItemGroup>
 
 </Project>

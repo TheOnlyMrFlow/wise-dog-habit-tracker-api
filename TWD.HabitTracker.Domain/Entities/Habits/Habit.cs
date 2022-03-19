@@ -1,8 +1,9 @@
 ﻿using TWD.HabitTracker.Domain.Common;
-using TWD.HabitTracker.Domain.Entities.Habits.Errors;
 using TWD.HabitTracker.Domain.Exceptions;
 using TWD.HabitTracker.Domain.ValueObjects;
 using TWD.HabitTracker.Domain.ValueObjects.Stamp;
+using OneOf;
+using OneOf.Types;
 
 namespace TWD.HabitTracker.Domain.Entities.Habits;
 
@@ -14,7 +15,7 @@ public class Habit
         UserId = userId;
         Name = name;
         StartDate = startDate;
-        WeekDays = new HashSet<DayOfWeek>(weekDays);
+        WeekDays = new(weekDays);
         _stamps = stamps;
         _lastTenStamps = lastTenStamps;
         Objective = objective;
@@ -45,13 +46,13 @@ public class Habit
     private ICollection<Stamp> _lastTenStamps;
     public IEnumerable<Stamp> LastTenStamps => _lastTenStamps;
 
-    public Either<AddStampError, Habit> AddStamp(Stamp stamp)
+    public OneOf<Success, StampAlreadyExistsError, StampMushHaveValueError> AddStamp(Stamp stamp)
     {
         if (_stamps.Any(s => s.Date == stamp.Date))
-            return new Either<AddStampError, Habit>(AddStampError.StampAlreadyExists());
+            return new StampAlreadyExistsError();
 
         if (IsQuantifiable && !stamp.Value.HasValue)
-            return new Either<AddStampError, Habit>(AddStampError.StampMushHaveValue());
+                return new StampMushHaveValueError();
         
         _stamps.Add(stamp);
 
@@ -60,19 +61,21 @@ public class Habit
         
         else if (_lastTenStamps.Any(s => s.IsOlderThan(s)))
             _lastTenStamps = _stamps.OrderByDescending(s => s.Date).Take(10).ToList();
-
-        return new Either<AddStampError, Habit>(this);
+        
+        return new Success();
     }
 
-    public void RemoveStamp(DateTime stampDate)
+    public OneOf<Success, StampNotFoundError> RemoveStamp(DateTime stampDate)
     {
         var stamp = _stamps.FirstOrDefault(s => s.Date == stampDate);
         if (stamp is null)
-            throw new StampNotFoundException();
+            return new StampNotFoundError();
 
         _stamps.Remove(stamp);
         
         if (_lastTenStamps.Any(s => s.Date == stampDate))
             _lastTenStamps = _stamps.OrderByDescending(s => s.Date).Take(10).ToList();
+
+        return new Success();
     }
 }

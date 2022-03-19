@@ -18,25 +18,19 @@ public class RemoveStampFromHabitInteractor : UseCaseInteractor<RemoveStampFromH
     public override async Task InvokeAsync()
     {
         if (Request is null) throw new ArgumentNullException(nameof(Request));
-
-        try
-        {
-            var habit = await _habitReadRepository.GetAsync(Request.HabitId);
-            if (habit is null)
-            {
-                Presenter?.NotFound();
-                return;
-            }
-            
-            habit.RemoveStamp(Request.StampDate);
-
-            await _habitWriteRepository.UpdateAsync(habit);
-            
-            Presenter?.Success(new RemoveStampFromHabitResponse(habit));
-        }
-        catch (StampNotFoundException)
-        {
-            Presenter?.NotFound();
-        }
+        
+        await (await _habitReadRepository.GetAsync(Request.HabitId))
+            .Match(
+                async habit =>
+                {
+                    await habit.RemoveStamp(Request.StampDate).Match(
+                        async success =>
+                        {
+                            Presenter?.Success(new RemoveStampFromHabitResponse(habit));
+                            await _habitWriteRepository.UpdateAsync(habit);
+                        },
+                        error => Task.Run(() => Presenter?.NotFound()));
+                }, 
+                none => Task.Run(() => Presenter?.NotFound()));
     }
 }

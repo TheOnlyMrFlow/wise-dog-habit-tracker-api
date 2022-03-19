@@ -24,21 +24,29 @@ public class AddStampToHabitInteractor : UseCaseInteractor<AddStampToHabitReques
 
         var maybeHabit = await _habitReadRepository.GetAsync(Request.HabitId);
             
-        await maybeHabit
-            .Match(
-            () => Presenter?.NotFound(),
+        await maybeHabit.Match(
             async habit =>
             {
                 var stamp = new Stamp(Request.StampDate, Request.StampValue);
-        
+
                 await habit.AddStamp(stamp).Match(
-                    error => error.Match(stampAlreadyExists => Presenter?.StampAlreadyExists(), stampMustHaveValue => Presenter?.StampMustHaveValue()),
                     async _ =>
                     {
-                        Presenter?.Success(new AddStampToHabitResponse(habit));
                         await _habitWriteRepository.UpdateAsync(habit);
+                        Presenter?.Success(new AddStampToHabitResponse(habit));
+                    },
+                    error =>
+                    {
+                        Presenter?.StampMustHaveValue();
+                        return Task.CompletedTask;
+                    },
+                    error =>
+                    {
+                        Presenter?.StampAlreadyExists();
+                        return Task.CompletedTask;
                     });
-            }
+            },
+            none => Task.Run(() => Presenter?.NotFound())
         );
     }
 }
