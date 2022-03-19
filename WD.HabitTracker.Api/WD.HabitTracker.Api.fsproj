@@ -5,7 +5,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Controllers\LoginController.fs" />
+        <Compile Include="Controllers\Login.Controller.fs" />
+        <Compile Include="Controllers\ListHabits.Controller.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 
@@ -16,6 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Giraffe" Version="6.0.0-alpha-2" />
       <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 

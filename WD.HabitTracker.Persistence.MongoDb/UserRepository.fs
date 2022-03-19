@@ -1,7 +1,6 @@
 ﻿namespace WD.HabitTracker.Persistence.MongoDb
 
 open Microsoft.FSharp.Control
-open MongoDB.Bson
 open MongoDB.Driver
 open WD.HabitTracker.Application.Services.Persistence
 open WD.HabitTracker.Domain.Users
@@ -9,6 +8,14 @@ open WD.HabitTracker.Persistence.MongoDb.Documents
 
 type UserRepository(client: HabitTrackerMongoDatabase) =
     let userCollection = client.GetUserCollection ()
+    
+    let mapUserDocumentToUSer userDocument =
+        {
+            Id = userDocument.Id
+            AuthenticationMean = Device {
+                DeviceToken = userDocument.AuthInfo.DeviceAuth.DeviceToken
+            }
+        }
     
     interface IUserReadRepository with
         member this.FindUserByDeviceTokenAsync(deviceToken) = async {
@@ -19,8 +26,5 @@ type UserRepository(client: HabitTrackerMongoDatabase) =
             
             return match (matchingUsers.ToList() |> Seq.tryHead) with
                     | None -> None
-                    | Some user -> Some {
-                        Id = user.Id
-                        AuthenticationMean = Device {DeviceToken = user.AuthInfo.DeviceAuth.DeviceToken }
-                    }
+                    | Some userDocument -> userDocument |> mapUserDocumentToUSer |> Some
         }

@@ -1,4 +1,4 @@
-﻿namespace WD.HabitTracker.Api.Controllers
+﻿namespace WD.HabitTracker.Api.Controllers.Login
 
 open Microsoft.AspNetCore.Mvc
 open Microsoft.Extensions.Logging
@@ -6,11 +6,11 @@ open WD.HabitTracker.Application.LoginWithDeviceUseCase
 open WD.HabitTracker.Application.Services.Authentication
 open WD.HabitTracker.Application.Services.Persistence
 
-type SuccessHttpResponse = {
+type LoginSuccessHttpResponse = {
     Jwt: string
 }
 
-type RequestBody = {
+type LoginRequestBody = {
     DeviceToken: string
 }
 
@@ -20,7 +20,7 @@ type LoginController (logger : ILogger<LoginController>) =
     inherit ControllerBase()
     
     [<HttpPost>]
-    member this.LoginAsync([<FromServices>] userReadRepository: IUserReadRepository, [<FromServices>] jwtManager: IJwtManager, [<FromBody>] requestBody: RequestBody) = async {
+    member this.LoginAsync([<FromServices>] userReadRepository: IUserReadRepository, [<FromServices>] jwtManager: IJwtManager, [<FromBody>] requestBody: LoginRequestBody) = async {
         let useCaseInput: LoginWithDeviceInput = {DeviceToken = requestBody.DeviceToken}
         let! useCaseResult = loginWithDeviceAsync userReadRepository jwtManager useCaseInput 
         return match useCaseResult with

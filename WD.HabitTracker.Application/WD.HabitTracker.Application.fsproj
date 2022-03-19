@@ -7,7 +7,9 @@
 
     <ItemGroup>
         <Compile Include="Services\Persistence\UserReadRepository.Service.fs" />
+        <Compile Include="Services\Persistence\HabitReadRepository.Service.fs" />
         <Compile Include="Services\Authentication\IJwtManager.fs" />
+        <Compile Include="UseCases\ListHabits.UseCase.fs" />
         <Compile Include="UseCases\Login.UseCase.fs" />
     </ItemGroup>
 
